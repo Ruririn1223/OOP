@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Лаб1
 {
-	internal class SavingsAccount : BankAccount
+	public class SavingsAccount : BankAccount
 	{
 		private double interestRate { get; set; }
 

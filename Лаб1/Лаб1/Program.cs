@@ -2,43 +2,50 @@
 using System.Collections.Generic;
 using Лаб1;
 
-List<BankAccount> accounts = new List<BankAccount>();
+Bank<SavingsAccount> savingsBank = new Bank<SavingsAccount>("Сберегательный Банк");
+Bank<CheckingAccount> checkingBank = new Bank<CheckingAccount>("Расчетный Банк");
 
-accounts.Add(new SavingsAccount("SA-001", "Концевой Д.Д.", 100000, 5.5));
-accounts.Add(new SavingsAccount("SA-002", "Винковский М.М.", 250000, 6.0));
-accounts.Add(new CheckingAccount("CA-001", "Дубровин Ю.Ю.", 50000, 10000));
-accounts.Add(new CheckingAccount("CA-002", "Хисматулина С.С.", 75000, 15000));
+SavingsAccount savings1 = new SavingsAccount("SA-001", "Концевой Д.Д.", 100000, 5.5);
+SavingsAccount savings2 = new SavingsAccount("SA-002", "Винковский М.М.", 250000, 6.0);
+SavingsAccount savings3 = new SavingsAccount("SA-002", "Хисматулина С.С.", 75000, 6.5);
 
+savingsBank.OpenAccount(savings1);
+savingsBank.OpenAccount(savings2);
+savingsBank.OpenAccount(savings3);
 
+CheckingAccount checking1 = new CheckingAccount("CA-001", "ИП Дубровин ", 50000, 10000);
+CheckingAccount checking2 = new CheckingAccount("CA-002", "OOO Хисамединова", 75000, 15000);
+
+checkingBank.OpenAccount(checking1);
+checkingBank.OpenAccount(checking2);
 
 Console.WriteLine("Информация о всех счетах");
-foreach (var account in accounts)
+
+SavingsAccount foundSavings = savingsBank.FindAccount("SA-002");
+if (foundSavings != null)
 {
-	account.DisplayInfo();
-	Console.WriteLine();
+	foundSavings.DisplayInfo();
 }
 
-Console.WriteLine("\nРасчёт процентов");
-double totalInterest = 0;
-foreach (var account in accounts)
-{
-	double interest = account.CalculateInterest();
-	Console.WriteLine($"Счет {account._accountNumber}: проценты = {interest:N}");
-	totalInterest += interest;
-}
-Console.WriteLine($"\nОбщая сумма процентов: {totalInterest:N}");
+CheckingAccount foundChecking = checkingBank.FindAccount("CA-999");
 
-Console.WriteLine("\nОперации со счетами");
+savingsBank.CalculateAllInterest();
+checkingBank.CalculateAllInterest();
 
-accounts[0].Deposit(25000);
+savingsBank.DisplayAllAccounts();
+checkingBank.DisplayAllAccounts();
 
-accounts[2].Withdraw(30000);
+Console.WriteLine("Статистика");
+Console.WriteLine($"Счетов в Сберегательном банке: {savingsBank.AccountsCount}");
+Console.WriteLine($"Счетов в Расчетном банке: {checkingBank.AccountsCount}");
+Console.WriteLine($"Всего счетов открыто: {Bank<SavingsAccount>.TotalAccountsCount}");
 
-accounts[3].Withdraw(85000);
+savings1.Deposit(50000);
+checking1.Deposit(25000);
 
-Console.WriteLine("\nФинальное состояние счетов");
-foreach (var account in accounts)
-{
-	account.DisplayInfo();
-	Console.WriteLine();
-}
+savings2.Withdraw(30000);
+checking2.Withdraw(85000);
+
+Console.WriteLine("\n");
+savingsBank.CalculateAllInterest();
+checkingBank.CalculateAllInterest();

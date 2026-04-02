@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Лаб1
 {
-	internal abstract class BankAccount
+	public abstract class BankAccount
 	{
 		public string _accountNumber { get; set; }
 		protected double _balance { get; set; }

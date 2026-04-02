@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Лаб1
 {
-	internal class CheckingAccount: BankAccount
+	public class CheckingAccount: BankAccount
 	{
 		public double _overdraftLimit { get; set; }
 

@@ -28,7 +28,7 @@ namespace Лаб1
 			{
 				accounts.Add(account);
 				totalAccountsCount++;
-				Console.WriteLine($" Счет {account._accountNumber} открыт в банке {bankName}");
+				Console.WriteLine($"Счет {account._accountNumber} открыт в банке {bankName}");
 			}
 		}
 
@@ -38,31 +38,31 @@ namespace Лаб1
 			{
 				if (account._accountNumber == number)
 				{
-					Console.WriteLine($" Счет {number} найден");
+					Console.WriteLine($"Счет {number} найден");
 					return account;
 				}
 			}
-			Console.WriteLine($" Счет {number} не найден");
+			Console.WriteLine($"Счет {number} не найден");
 			return null;
 		}
 
 		public void CalculateAllInterest()
 		{
-			Console.WriteLine($"\n=== Расчет процентов в банке {bankName} ===");
+			Console.WriteLine($"\nРасчет процентов в банке {bankName} ");
 			double totalInterest = 0;
 
 			foreach (var account in accounts)
 			{
 				double interest = account.CalculateInterest();
 				totalInterest += interest;
-				Console.WriteLine($"Счет {account._accountNumber}: {interest:F2} руб.");
+				Console.WriteLine($"Счет {account._accountNumber}: {interest:F2}");
 			}
-			Console.WriteLine($"Общая сумма процентов: {totalInterest:F2} руб.");
+			Console.WriteLine($"Общая сумма процентов: {totalInterest:F2}");
 		}
         
         public void DisplayAllAccounts()
 		{
-			Console.WriteLine($"\n=== Все счета банка {bankName} ===");
+			Console.WriteLine($"\nВсе счета банка {bankName} ");
 			Console.WriteLine($"Количество счетов: {accounts.Count}");
 
 			foreach (var account in accounts)
@@ -79,7 +79,7 @@ namespace Лаб1
 			{
 				accounts.Remove(account);
 				totalAccountsCount--;
-				Console.WriteLine($"✓ Счет {number} закрыт");
+				Console.WriteLine($"Счет {number} закрыт");
 				return true;
 			}
 			return false;
