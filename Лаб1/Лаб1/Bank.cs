@@ -84,5 +84,10 @@ namespace Лаб1
 			}
 			return false;
 		}
-	}
+
+        public List<T> GetAllAccounts()
+        {
+            return accounts;
+        }
+    }
 }

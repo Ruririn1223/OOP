@@ -26,5 +26,16 @@ namespace Лаб1
 			Console.WriteLine($"Процентная ставка: {interestRate}%");
 			Console.WriteLine($"Начисленные проценты: {CalculateInterest():N}");
 		}
-	}
+
+        public static SavingsAccount operator ++(SavingsAccount account)
+        {
+            if (account != null)
+            {
+                double interest = account.CalculateInterest();
+                account._balance += interest;
+                Console.WriteLine($"Начислены проценты: {interest:N}. Новый баланс: {account._balance:N}");
+            }
+            return account;
+        }
+    }
 }

@@ -9,8 +9,8 @@ namespace Лаб1
 	public abstract class BankAccount
 	{
 		public string _accountNumber { get; set; }
-		protected double _balance { get; set; }
-		private string _ownerName { get; set; }
+        public double _balance { get; set; }
+        public string _ownerName { get; set; }
 
 		protected BankAccount(string accountNumber, string ownerName, double initialBalance)
 		{
@@ -49,5 +49,51 @@ namespace Лаб1
 			Console.WriteLine($"Номер счета: {_accountNumber}");
 			Console.WriteLine($"Баланс: {_balance:N}");
 		}
-	}
+
+        public static BankAccount operator +(BankAccount account, double amount)
+        {
+            if (account != null && amount > 0)
+            {
+                account.Deposit(amount);
+            }
+            return account;
+        }
+
+        public static BankAccount operator -(BankAccount account, double amount)
+        {
+            if (account != null && amount > 0)
+            {
+                account.Withdraw(amount);
+            }
+            return account;
+        }
+        // 2 + 2 
+
+        public static bool operator >(BankAccount left, BankAccount right)
+        {
+            if (left == null || right == null)
+                return false;
+            return left._balance > right._balance;
+        }
+
+        public static bool operator <(BankAccount left, BankAccount right)
+        {
+            if (left == null || right == null)
+                return false;
+            return left._balance < right._balance;
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            if (obj is BankAccount other)
+                return this._accountNumber == other._accountNumber;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return _accountNumber.GetHashCode();
+        }
+    }
 }
